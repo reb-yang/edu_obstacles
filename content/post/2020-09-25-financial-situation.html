@@ -220,13 +220,6 @@ The following graph compares the percentage of students who would like to attain
 <p>When asked if they faced obstacles in obtaining education, 31% of students responded “Yes”.
 Financial situation was overwhelmingly identified as the main obstacle students faced, comprising 68% of responses. Other obstacles identified included the length of time the program requires (5%), the inability to get into a program (6%), personal health (5%), and having to care for children (4%).</p>
 <p><img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-6-1.png" width="672" /><img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
-<pre class="r"><code>obs_n &lt;- nrow(obstacles_data)
-obstacles_students &lt;-  student_data %&gt;% filter(obstacles== &quot;Yes&quot;)
-
-sex_percent &lt;- obstacles_students %&gt;% filter(sex != &quot;NA&quot;, obstacles_future_edu != &quot;NA&quot;) %&gt;% group_by(obstacles_future_edu)  %&gt;% count(sex) %&gt;%  mutate(ratio=n/sum(n)) %&gt;% mutate(obstacles_future_edu = ifelse(obstacles_future_edu ==&quot;Other - Specify&quot;, &quot;Other&quot;, obstacles_future_edu))
-
-
-obstacles_sex  &lt;- sex_percent %&gt;% ggplot(aes(y=obstacles_future_edu, x=ratio, fill = sex)) + geom_bar(position = &quot;fill&quot;, stat = &quot;identity&quot;)  + theme_minimal() + labs(y = &quot;Obstacles&quot;, x = &quot;&quot;, fill = &quot;Sex&quot;) + ggtitle(&quot;Breakdown of Obstacles by Gender &quot;) + theme(plot.title = element_text(hjust = 0.5)) + scale_fill_manual(values = c(&quot;deeppink&quot;, &quot;dodgerblue&quot;)) + scale_x_continuous(labels = scales::percent) + geom_text(aes(label = paste0(round(ratio*100),&quot;%&quot;)), position = position_stack(vjust = 0.5), size = 3, color = &quot;white&quot;) </code></pre>
 <p>This is unsurprising given the rising costs of higher education across Canada. According to Statistics Canada, in 2015, 50% of students graduated with student debt. And it doesn’t look like it’s getting more affordable/
 The financial burden of postsecondary education is compounded by cuts to government funding for low-income students. In 2019, the Ontario Student Assistant Plan (OSAP) was cut by $670 million, leading to a reduction in grants and forcing students to take on student debt to finance their education.</p>
 <p>Breaking down the obstacles faced by gender found that the majority of obstacles were reported by women. In particular, child care had the greatest disproportionate effect. Of those who said caring for children was an obstacle, a whopping 93% of them were women (*See weaknesses)

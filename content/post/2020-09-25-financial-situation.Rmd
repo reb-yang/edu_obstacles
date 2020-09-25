@@ -127,7 +127,7 @@ what_obstacles <- what_obstacles %>% ggplot(aes(y = obstacles_future_edu, x = pr
 future_obstacles
 what_obstacles
 ```
-```{r}
+```{r, include = FALSE}
 obs_n <- nrow(obstacles_data)
 obstacles_students <-  student_data %>% filter(obstacles== "Yes")
 
