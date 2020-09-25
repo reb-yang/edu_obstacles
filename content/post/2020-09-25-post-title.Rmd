@@ -1,11 +1,12 @@
 ---
-title: "Test Blog 1"
+title: "Financial situation is greatest obstacle faced by Canadian students"
 author: "Rebecca Yang"
 date: '2020-09-25'
 slug: post-title
 categories: []
 tags: []
 output: blogdown::html_page
+abstract: "Many Canadian students have aspirations for higher levels of education, but do not always believe that it is likely to achieve them. This research studied the obstacles they face in obtaining their desired level of education as reported in the 2016 General Social Survey conducted by Statistics Canada. It found that financial situation was the most common obstacle and the majority of obstacles were reported by women. These findings reinforce the importance for government funding and financial aid to make education accessible for all students. "
 ---
 
 My test blog
