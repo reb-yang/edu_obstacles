@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.75.1" />
 
 
-<title>Blog Post 1 - A Hugo website</title>
-<meta property="og:title" content="Blog Post 1 - A Hugo website">
+<title>Hello R Markdown - A Hugo website</title>
+<meta property="og:title" content="Hello R Markdown - A Hugo website">
 
 
   <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -63,20 +63,16 @@
     <span class="article-duration">1 min read</span>
     
 
-    <h1 class="article-title">Blog Post 1</h1>
+    <h1 class="article-title">Hello R Markdown</h1>
 
     
-    <span class="article-date">2020-09-27</span>
+    <span class="article-date">2015-07-23</span>
     
 
     <div class="article-content">
       
 
 
-<div id="abstract" class="section level1">
-<h1>Abstract</h1>
-<p>Many Canadian students have aspirations for higher levels of education, but do not always believe that it is likely to achieve them. This research studied the obstacles they face in obtaining their desired level of education as reported in the 2016 General Social Survey conducted by Statistics Canada. It found that financial situation was the most common obstacle and the majority of obstacles were reported by women. These findings reinforce the importance for government funding and financial aid to make education accessible for all students."</p>
-</div>
 <div id="r-markdown" class="section level1">
 <h1>R Markdown</h1>
 <p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
@@ -98,6 +94,23 @@ fit
 ## Coefficients:
 ## (Intercept)        speed  
 ##     -17.579        3.932</code></pre>
+</div>
+<div id="including-plots" class="section level1">
+<h1>Including Plots</h1>
+<p>You can also embed plots. See Figure <a href="#fig:pie">1</a> for example:</p>
+<pre class="r"><code>par(mar = c(0, 1, 0, 1))
+pie(
+  c(280, 60, 20),
+  c(&#39;Sky&#39;, &#39;Sunny side of pyramid&#39;, &#39;Shady side of pyramid&#39;),
+  col = c(&#39;#0292D8&#39;, &#39;#F7EA39&#39;, &#39;#C4B632&#39;),
+  init.angle = -50, border = NA
+)</code></pre>
+<div class="figure"><span id="fig:pie"></span>
+<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png" alt="A fancy pie chart." width="672" />
+<p class="caption">
+Figure 1: A fancy pie chart.
+</p>
+</div>
 </div>
 
     </div>
