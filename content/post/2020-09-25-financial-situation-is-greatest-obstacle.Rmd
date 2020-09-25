@@ -1,11 +1,10 @@
 ---
-title: "Financial situation is greatest obstacle faced by Canadian students"
-author: "Rebecca Yang"
+title: Financial situation is greatest obstacle for Canadian students
+author: Rebecca Yang
 date: '2020-09-25'
-slug: post-title
+slug: financial-situation-is-greatest-obstacle
 categories: []
 tags: []
-output: blogdown::html_page
 
 ---
 ```{r setup, include=FALSE}
@@ -54,7 +53,7 @@ The variables of interest were the following:
 - obstacles_future_edu: the specific obstacles identified by the respondents 
 
 Summary statistics for these variables...
-```{r, include = FALSE}
+```{r, include= FALSE }
 # tables 
 
 student_data <- read_csv("student_data.csv")  %>% mutate(age_group = ifelse(age_group == "15 to 24 years", "15 to 24 years", "25 and over")) %>% mutate(obstacles_future_edu = ifelse(obstacles_future_edu == "Other - Specify", "Other", obstacles_future_edu)) # loading data
@@ -74,14 +73,16 @@ what_obstacles_table <- what_obstacles_data %>% group_by(obstacles_future_edu)%>
 colnames(what_obstacles_table) <- c("Obstacles", "Number of Students", "Proportion of Students")
 what_obstacles_table <-what_obstacles_table %>% kbl() %>% kable_styling() 
 
+```
+
+```{r, echo= FALSE}
 sex_table
 obstacles_table
 what_obstacles_table
-
 ```
 
 You must include graphs.
-```{r, include = FALSE}
+```{r, include=FALSE}
 # graphs 
 
 likely_students <- student_data %>% filter(likely_future_edu != "NA", desired_future_edu != "NA") %>% group_by(likely_future_edu) %>% summarise(n=n()) %>% mutate(future_edu = "likely") %>% rename(edu_level = likely_future_edu) %>% mutate(prop = n*100/nrow(student_data))
@@ -95,6 +96,9 @@ future_education_data <- rbind(likely_students, desired_students)
 
 future_edu_props <-  future_education_data %>% ggplot(aes(y =reorder(edu_level, prop ), x=prop, fill = future_edu)) + geom_bar(stat = "identity", position = "dodge") + scale_fill_manual(values=mycols) + theme_minimal()  + labs(x="Percentage of Responses (%)", y = "Education Level", fill = "") + ggtitle("Students' Desired vs. Likely Future Education Levels") + theme(plot.title = element_text(hjust = 0.5))  + geom_text(aes(label = paste(round(prop), "%")), size = 2.4, position = position_dodge(width = 1), hjust = -0.15) + scale_y_discrete( labels = c("Other", "High School Diploma/Equivalent", "Non-college Certificate", "Professional (i.e. MD)" , "Ph.D." , "College/CEGEP", "Master's", "Bachelor's" )) + scale_x_continuous(limits = c(0, 40))
 
+
+```
+```{r, echo = FALSE}
 future_edu_props
 ```
 
@@ -144,3 +148,4 @@ https://sda-artsci-utoronto-ca.myaccess.library.utoronto.ca/cgi-bin/sda/hsda?har
 -  Hao Zhu (2020). kableExtra: Construct Complex Table with 'kable' and Pipe Syntax. R
   package version 1.2.1. https://CRAN.R-project.org/package=kableExtra
 - Alexander, Rohan (2020) gss_cleaning.R [Source code]. 
+

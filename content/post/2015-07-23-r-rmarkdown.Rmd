@@ -9,8 +9,7 @@ tags: ["R Markdown", "plot", "regression"]
 ---
 # Abstract 
 Many Canadian students have aspirations for higher levels of education, but do not always believe that it is likely to achieve them. This research studied the obstacles they face in obtaining their desired level of education as reported in the 2016 General Social Survey conducted by Statistics Canada. It found that financial situation was the most common obstacle and the majority of obstacles were reported by women. These findings reinforce the importance for government funding and financial aid to make education accessible for all students."
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE)
+
 ```
 
 # R Markdown
