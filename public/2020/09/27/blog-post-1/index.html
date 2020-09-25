@@ -76,22 +76,26 @@
 <div id="abstract" class="section level1">
 <h1>Abstract</h1>
 <p>Many Canadian students have aspirations for higher levels of education, but do not always believe that it is likely to achieve them. This research studied the obstacles they face in obtaining their desired level of education as reported in the 2016 General Social Survey conducted by Statistics Canada. It found that financial situation was the most common obstacle and the majority of obstacles were reported by women. These findings reinforce the importance for government funding and financial aid to make education accessible for all students."</p>
-</div>
-<div id="r-markdown" class="section level1">
-<h1>R Markdown</h1>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)
-##      speed           dist       
+<pre><code>
+# R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;http://rmarkdown.rstudio.com&gt;.
+
+You can embed an R code chunk like this:
+
+
+```r
+summary(cars)</code></pre>
+<pre><code>##      speed           dist       
 ##  Min.   : 4.0   Min.   :  2.00  
 ##  1st Qu.:12.0   1st Qu.: 26.00  
 ##  Median :15.0   Median : 36.00  
 ##  Mean   :15.4   Mean   : 42.98  
 ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-fit &lt;- lm(dist ~ speed, data = cars)
-fit
-## 
+##  Max.   :25.0   Max.   :120.00</code></pre>
+<pre class="r"><code>fit &lt;- lm(dist ~ speed, data = cars)
+fit</code></pre>
+<pre><code>## 
 ## Call:
 ## lm(formula = dist ~ speed, data = cars)
 ## 
