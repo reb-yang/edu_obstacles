@@ -4,8 +4,11 @@ author: "Rebecca Yang"
 date: 2020-09-27T21:13:14-05:00
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
----
 
+---
+# Abstract 
+
+abstract: "Many Canadian students have aspirations for higher levels of education, but do not always believe that it is likely to achieve them. This research studied the obstacles they face in obtaining their desired level of education as reported in the 2016 General Social Survey conducted by Statistics Canada. It found that financial situation was the most common obstacle and the majority of obstacles were reported by women. These findings reinforce the importance for government funding and financial aid to make education accessible for all students."
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 ```
@@ -22,16 +25,3 @@ fit <- lm(dist ~ speed, data = cars)
 fit
 ```
 
-# Including Plots
-
-You can also embed plots. See Figure \@ref(fig:pie) for example:
-
-```{r pie, fig.cap='A fancy pie chart.', tidy=FALSE}
-par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c('Sky', 'Sunny side of pyramid', 'Shady side of pyramid'),
-  col = c('#0292D8', '#F7EA39', '#C4B632'),
-  init.angle = -50, border = NA
-)
-```
