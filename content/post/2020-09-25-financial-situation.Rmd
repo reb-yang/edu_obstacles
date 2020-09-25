@@ -123,7 +123,7 @@ what_obstacles <- what_obstacles %>% ggplot(aes(y = obstacles_future_edu, x = pr
 
 ```
 
-```{r}
+```{r, echo = FALSE}
 future_obstacles
 what_obstacles
 ```

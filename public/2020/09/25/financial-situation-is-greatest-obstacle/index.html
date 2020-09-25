@@ -22,6 +22,11 @@
 
 
 
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
 <link rel="stylesheet" href="/css/fonts.css" media="all">
 <link rel="stylesheet" href="/css/main.css" media="all">
 
@@ -83,7 +88,7 @@
 <p>Third paragraph: Outline of the paper. Future work. Weaknesses.
 Finally, some weaknesses of these findings must be acknowledged. The data used was from a survey that was targeted towards all Canadians, so students are only a subset of the full sample. Consequently, when the data was broken down by the different obstacles and compared between different groups, the sample sizes became very small (n&lt;30). As such, these findings should be taken with a grain of salt and merely serve as the impetus for further discussion and investigation. A survey targeted towards students about the obstacles they face and ways they can be best supported is the logical next step in bridging the gap between students’ educational hopes and realities.</p>
 <p>It seems counterintuitive to promote education as a society while still having such high barriers to postsecondary education.
-The financial burden of postsecondary education may seem like common knowledge at this point, but apparently it has not gotten through to everyone. In 2019, the Ontario provincial government announced cuts of $670 million to OSAP, the Ontario Student Assistance Program. While they justified it through a 10% tuition reduction, student aid packages were reduced by much more, and grants were replaced by repayable loans.</p>
+The financial burden of postsecondary education may seem like common knowledge at this point, but apparently it has not gotten through the most important people. In 2019, the Ontario provincial government announced cuts of $670 million to OSAP, the Ontario Student Assistance Program. While they justified it through a 10% tuition reduction, student aid packages were reduced by much more, and grants were replaced by repayable loans.</p>
 </div>
 <div id="data" class="section level1">
 <h1>Data</h1>
@@ -270,15 +275,24 @@ Takes too long
 </tbody>
 </table>
 <p>You must include graphs.</p>
-<p><img src="/post/BlogPost1_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>The distinction between likely and desired education by the survey was of particular interest.
 The following graph compares the percentage of students who would like to attain a certain level to the percentage of students who believe that they will actually accomplish that level. From the graph, it can be seen that Master’s and Ph.D. degrees are not perceived to be attainable, as not all students that desired them believed they were likely to acquire them. Instead, they seem to have resigned themselves to the fact that they will probably “settle” for a Bachelor’s, as 35% of students think they will likely get a Bachelor’s compared to 27% that are actually aiming for them. On the flip side, for lower levels such as college degrees, non-college certificates, and high school diplomas, smaller gaps exist.</p>
 <p>The disconnect between students’ aspirations and what they believed possible warranted further investigation into what stands between them and their desired education.</p>
 <p>When asked if they faced obstacles in obtaining education, 31% of students responded “Yes”.
 Financial situation was overwhelmingly identified as the main obstacle students faced, comprising 68% of responses. Other obstacles identified included the length of time the program requires (5%), the inability to get into a program (6%), personal health (5%), and having to care for children (4%).</p>
+<p><img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-6-1.png" width="672" /><img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<pre class="r"><code>obs_n &lt;- nrow(obstacles_data)
+obstacles_students &lt;-  student_data %&gt;% filter(obstacles== &quot;Yes&quot;)
+
+sex_percent &lt;- obstacles_students %&gt;% filter(sex != &quot;NA&quot;, obstacles_future_edu != &quot;NA&quot;) %&gt;% group_by(obstacles_future_edu)  %&gt;% count(sex) %&gt;%  mutate(ratio=n/sum(n)) %&gt;% mutate(obstacles_future_edu = ifelse(obstacles_future_edu ==&quot;Other - Specify&quot;, &quot;Other&quot;, obstacles_future_edu))
+
+
+obstacles_sex  &lt;- sex_percent %&gt;% ggplot(aes(y=obstacles_future_edu, x=ratio, fill = sex)) + geom_bar(position = &quot;fill&quot;, stat = &quot;identity&quot;)  + theme_minimal() + labs(y = &quot;Obstacles&quot;, x = &quot;&quot;, fill = &quot;Sex&quot;) + ggtitle(&quot;Breakdown of Obstacles by Gender &quot;) + theme(plot.title = element_text(hjust = 0.5)) + scale_fill_manual(values = c(&quot;deeppink&quot;, &quot;dodgerblue&quot;)) + scale_x_continuous(labels = scales::percent) + geom_text(aes(label = paste0(round(ratio*100),&quot;%&quot;)), position = position_stack(vjust = 0.5), size = 3, color = &quot;white&quot;) </code></pre>
 <p>This is unsurprising given the rising costs of higher education across Canada. According to Statistics Canada, in 2015, 50% of students graduated with student debt. And it doesn’t look like it’s getting more affordable/
 The financial burden of postsecondary education is compounded by cuts to government funding for low-income students. In 2019, the Ontario Student Assistant Plan (OSAP) was cut by $670 million, leading to a reduction in grants and forcing students to take on student debt to finance their education.</p>
-<p>Breaking down the obstacles faced by gender found that the majority of obstacles were reported by women. In particular, child care had the greatest disproportionate effect. Of those who said caring for children was an obstacle, a whopping 93% of them were women (*See weaknesses)</p>
+<p>Breaking down the obstacles faced by gender found that the majority of obstacles were reported by women. In particular, child care had the greatest disproportionate effect. Of those who said caring for children was an obstacle, a whopping 93% of them were women (*See weaknesses)
+<img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-9-1.png" width="672" /><img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
 </div>
 <div id="discussion" class="section level1">
 <h1>Discussion</h1>
@@ -299,49 +313,6 @@ The financial burden of postsecondary education is compounded by cuts to governm
 <li>JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and Winston Chang and Richard Iannone (2020). rmarkdown: Dynamic Documents for R. R package version 2.3. URL <a href="https://rmarkdown.rstudio.com" class="uri">https://rmarkdown.rstudio.com</a>.</li>
 <li>Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A
 Grammar of Data Manipulation. R package version 1.0.2.
-<a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a></li>
-<li>Statistics Canada. 2017. General social survey on Canadians at Work and Home (cycle 30), 2016 (public-use microdata file). Statistics Canada (producer). Using CHASS (distributor).
-<a href="https://sda-artsci-utoronto-ca.myaccess.library.utoronto.ca/cgi-bin/sda/hsda?harcsda4+gss30" class="uri">https://sda-artsci-utoronto-ca.myaccess.library.utoronto.ca/cgi-bin/sda/hsda?harcsda4+gss30</a> (accessed September 25, 2020). Accompanying documentation: user guide and questionnaire (PDF).</li>
-<li>Sam Firke (2020). janitor: Simple Tools for Examining and Cleaning Dirty Data. R
-package version 2.0.1. <a href="https://CRAN.R-project.org/package=janitor" class="uri">https://CRAN.R-project.org/package=janitor</a></li>
-<li>Hao Zhu (2020). kableExtra: Construct Complex Table with ‘kable’ and Pipe Syntax. R
-package version 1.2.1. <a href="https://CRAN.R-project.org/package=kableExtra" class="uri">https://CRAN.R-project.org/package=kableExtra</a></li>
-<li>Alexander, Rohan (2020) gss_cleaning.R [Source code].</li>
-</ul>
-</div>
-
-    </div>
-  </article>
-
-  
-
-
-</main>
-
-      <footer class="footer">
-        <ul class="footer-links">
-          <li>
-            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
-          </li>
-          <li>
-            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
-          </li>
-        </ul>
-      </footer>
-
-    </div>
-    
-
-    
-<script src="/js/math-code.js"></script>
-<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-    
-  </body>
-</html>
-
-ion 1.0.2.
 <a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a></li>
 <li>Statistics Canada. 2017. General social survey on Canadians at Work and Home (cycle 30), 2016 (public-use microdata file). Statistics Canada (producer). Using CHASS (distributor).
 <a href="https://sda-artsci-utoronto-ca.myaccess.library.utoronto.ca/cgi-bin/sda/hsda?harcsda4+gss30" class="uri">https://sda-artsci-utoronto-ca.myaccess.library.utoronto.ca/cgi-bin/sda/hsda?harcsda4+gss30</a> (accessed September 25, 2020). Accompanying documentation: user guide and questionnaire (PDF).</li>
