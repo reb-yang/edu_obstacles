@@ -13,8 +13,8 @@ output: blogdown::html_page
 
 ---
 
-<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
-<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <div id="abstract" class="section level1">
@@ -24,15 +24,15 @@ output: blogdown::html_page
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>First paragraph: General. Motivational. Majors specific finding.</p>
-<p>“Stay in school, kids”. This mantra has been preached to children for generations, instilling in them the idea that education is the key to social mobility, financial security, and a stable future. This holds even more true for post-secondary education. The 2016 Canadian census reported that men and women with a bachelor’s degree earned 47.2% and 58% more, respectively, than their counterparts with only high school diplomas (Statistics Canada). However, while society has made education very desirable, the question of whether or not it is attainable for all students remains. It was found that nearly a third (31%) of students reported facing obstacles in getting education. In addition perhaps unsurprisingly, the most commonly identified obstacle was financial situation, with 68% of responses.</p>
+<p>“Stay in school, kids”. This mantra has been preached to children for generations, instilling in them the idea that education is the key to social mobility, financial security, and a stable future. This holds even more true for post-secondary education. The 2016 Canadian census reported that men and women with a bachelor’s degree earned 47.2% and 58% more, respectively, than their counterparts with only high school diplomas (Statistics Canada). However, while society has made education very desirable, the question of whether or not it is attainable for all students remains. It was found that nearly a third of students reported facing obstacles in getting education. Perhaps unsurprisingly, the most commonly identified obstacle was financial situation, with 68% of responses.</p>
 <p>Second paragraph: More about what you did and found.</p>
-<p>Many students reported a difference in their desired level of education and the level of education they believed they were likely to complete. While non-college certificate programs and trade schools seemed to be considered relatively realistic options, Master’s and Ph.D. degrees were perceived to be less attainable.The disconnect between students’ aspirations and what they believed possible warranted further investigation into what exactly is standing between them and their desired education. After all, since education is such a good thing, shouldn’t students be able to get all the education they want? Whether or not there was difference in the obstacles faced by men and women and older and younger students was investigated as well. Most notably, the obstacle of caring for children was found to disproportionately affect women over the age of 25.</p>
-<p>Some weaknesses of these findings should be acknowledged. The data used was from a survey that was targeted towards all Canadians, so students are only a subset of the full sample. Consequently, when the data was broken down by the different obstacles and compared between different groups, the sample sizes became very small (n&lt;30). As such, these findings should be taken with a grain of salt and merely serve as a conversation starter and the impetus for further research and investigation. A survey targeted towards students about the obstacles they face and ways they can be best supported, perhaps with particular focus on women with children, is the logical next step in bridging the gap between students’ educational hopes and realities.</p>
+<p>Many students reported a difference in their desired level of education and the level of education they believed they were likely to complete. While non-college certificate programs and trade schools seemed to be considered relatively realistic options, Master’s and Ph.D. degrees were perceived to be less attainable.The disconnect between students’ aspirations and what they believed possible warranted further investigation into what exactly is standing between them and their desired education and whether or not obstacles are the same across different groups. Women and students over 25 were found to be more likely to face obstacles than men and students under 25. In addition, there are suggestions that the obstacle of caring for children disproportionately affect women over the age of 25.</p>
+<p>That being said, it’s important to bear in mind the limitations of these findings. The data used was from a survey that was targeted towards all Canadians, so students were only a subset of the full sample. Consequently, when the data was broken down by the different obstacles and compared between different groups, some of the sample sizes, specifically for the obstacle of child care, became very small (n&lt;30). As such, those findings should be taken with a grain of salt and merely serve as a conversation starter and the impetus for further research and investigation. A survey targeted towards students about the obstacles they face and ways they can be best supported, perhaps with particular focus on women with children, is the logical next step in bridging the gap between students’ educational hopes and realities.</p>
 </div>
 <div id="data" class="section level1">
 <h1>Data</h1>
-<p>The data used is from the General Social Survey (GSS), a survey conducted annually by Statistics Canada in order to gain insight into Canadians’ social lives, habits, views, and well-being, and usually focuses on a particular aspect each year. This analysis makes use of the 2016 iteration of the GSS, which focused on “Canadians at Work and Home”. The target population was residents of Canada, except for the Yukon, Northwest Territories, and Nunavut, aged 15 and over that were not institutionalized.It followed a stratified sampling design with 2 frames, the Address book and phone numbers.</p>
-<p>Individuals who reported that their main activity was going to school were identified as students and asked specific questions about their educational plans and goals. For the purposes of this study, non-college certificates, private business programs, trade school programs, and the like were considered together as a group. Students over the age of 25 were also considered together as one age group.</p>
+<p>The data used is from the General Social Survey (GSS), a survey conducted annually by Statistics Canada in order to gain insight into Canadians’ social lives, habits, views, and well-being, and usually focuses on a particular aspect each year. This analysis makes use of the 2016 iteration of the GSS, which focused on “Canadians at Work and Home”. The target population was residents of Canada, except for the Yukon, Northwest Territories, and Nunavut, aged 15 and over that were not institutionalized. It followed a stratified sampling design with 2 frames, the Address book and phone numbers (Statistics Canada).</p>
+<p>This study focuses on individuals who reported that their main activity was going to school. They were identified as students and asked specific questions about their educational plans and goals. For the purposes of this study, non-college certificates, private business programs, trade school programs, and the like were considered together as a group. Students over the age of 25 were also considered together as one age group.</p>
 <p>The variables of interest were the following:</p>
 <ul>
 <li>likely_future_edu: the level of education the respondent thought they were likely to attain (High School Diploma/Equivalent, Non-college Certificate, Professional (i.e. Medicine), Ph.D., College/CEGEP, Master’s, Bachelor’s, Other)</li>
@@ -45,16 +45,12 @@ output: blogdown::html_page
 <p>At a glance, the respondents were 54% female and 46% male, with 77% between the ages of 15 and 24 and 23% aged over 25.</p>
 <table class="table table-condensed table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-1">Table 1: </span>Summary Statistics
+<span id="tab:unnamed-chunk-1">Table 1: </span>Student Demographics
 </caption>
 <thead>
 <tr>
 <th style="text-align:left;">
 Variable
-</th>
-<th style="text-align:left;">
-</th>
-<th style="text-align:left;">
 </th>
 <th style="text-align:right;">
 Number of Respondents
@@ -65,14 +61,14 @@ Proportion
 </tr>
 </thead>
 <tbody>
+<tr grouplength="2">
+<td colspan="3" style="border-bottom: 1px solid;">
+<strong>Sex</strong>
+</td>
+</tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Sex
-</td>
-<td style="text-align:left;">
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
 Female
-</td>
-<td style="text-align:left;">
 </td>
 <td style="text-align:right;">
 664
@@ -82,10 +78,8 @@ Female
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
 Male
-</td>
-<td style="text-align:left;">
 </td>
 <td style="text-align:right;">
 572
@@ -94,14 +88,14 @@ Male
 46 %
 </td>
 </tr>
+<tr grouplength="2">
+<td colspan="3" style="border-bottom: 1px solid;">
+<strong>Age Group</strong>
+</td>
+</tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
-Age Group
-</td>
-<td style="text-align:left;">
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
 15 to 24 years
-</td>
-<td style="text-align:left;">
 </td>
 <td style="text-align:right;">
 957
@@ -111,10 +105,8 @@ Age Group
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
 25 and over
-</td>
-<td style="text-align:left;">
 </td>
 <td style="text-align:right;">
 279
@@ -123,127 +115,19 @@ Age Group
 23 %
 </td>
 </tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="9">
-Obstacles
-</td>
-<td style="text-align:left;">
-Don’t know
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-1 %
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:right;">
-836
-</td>
-<td style="text-align:right;">
-68 %
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="7">
-Yes
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:right;">
-384
-</td>
-<td style="text-align:right;">
-31 %
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Caring for own children
-</td>
-<td style="text-align:right;">
-15
-</td>
-<td style="text-align:right;">
-4 %
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Financial situation
-</td>
-<td style="text-align:right;">
-259
-</td>
-<td style="text-align:right;">
-68 %
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Not able to get into program
-</td>
-<td style="text-align:right;">
-24
-</td>
-<td style="text-align:right;">
-6 %
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Other
-</td>
-<td style="text-align:right;">
-44
-</td>
-<td style="text-align:right;">
-11 %
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Personal health
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-5 %
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Takes too long
-</td>
-<td style="text-align:right;">
-21
-</td>
-<td style="text-align:right;">
-5 %
-</td>
-</tr>
 </tbody>
 </table>
+<p>#Discussion</p>
 <div class="figure"><span id="fig:unnamed-chunk-4"></span>
 <img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-4-1.png" alt="A comparison of students' desired and likely education levels" width="672" />
 <p class="caption">
 Figure 1: A comparison of students’ desired and likely education levels
 </p>
 </div>
-<p>The distinction between likely and desired education by the survey was of particular interest.
-The following graph compares the percentage of students who would like to attain a certain level to the percentage of students who believe that they will actually accomplish that level. From the graph, it can be seen that Master’s and Ph.D. degrees are not perceived to be attainable, as not all students that desired them believed they were likely to acquire them. Instead, they seem to have resigned themselves to the fact that they will probably “settle” for a Bachelor’s, as 35% of students think they will likely get a Bachelor’s compared to 27% that are actually aiming for them. On the flip side, for lower levels such as college degrees, non-college certificates, and high school diplomas, smaller gaps exist.</p>
-<p>The disconnect between students’ aspirations and what they believed possible warranted further investigation into what stands between them and their desired education.</p>
-<p>When asked if they faced obstacles in obtaining education, 31% of students responded “Yes”.
-Financial situation was overwhelmingly identified as the main obstacle students faced, comprising 68% of responses. Other obstacles identified included the length of time the program requires (5%), the inability to get into a program (6%), personal health (5%), and having to care for children (4%).</p>
+<p>The distinction between likely and desired education made by the survey was of particular interest.
+The following graph compares the percentage of students who would like to attain a certain level of education to the percentage of students who believe that they will actually accomplish that level. From the graph, it can be seen that Master’s and Ph.D. degrees were not perceived to be attainable, as not all students that desired them believed they were likely to achieve them. Instead, they seem to have resigned themselves to the fact that they will probably “settle” for a Bachelor’s degree, as 35% of students think they will likely get one, compared to 27% that are actually aiming for them. On the flip side, for lower levels such as college degrees, non-college certificates, and high school diplomas, smaller gaps exist.</p>
+<p>But if education is such a good thing, what is stopping students from getting the level of education they want?</p>
+<p>When asked if they faced obstacles in obtaining education, 31% of students responded “Yes”. Financial situation was overwhelmingly identified as the main obstacle students faced, comprising 68% of responses. Other obstacles identified included the length of time the program requires (5%), the inability to get into a program (6%), personal health (5%), and having to care for children (4%).</p>
 <div class="figure"><span id="fig:unnamed-chunk-6"></span>
 <img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-6-1.png" alt="Students were asked if they faced obstacles in obtaining education" width="672" />
 <p class="caption">
@@ -256,19 +140,31 @@ Figure 2: Students were asked if they faced obstacles in obtaining education
 Figure 3: Students were asked to identity the obstacles they faced
 </p>
 </div>
-<p>This is unsurprising given the rising costs of higher education across Canada. According to Statistics Canada, in 2015, 50% of students graduated with some form of student debt.</p>
-<p>The finding that the financial burden of post-secondary education is an obstacle for students may seem like common knowledge, but evidently it is still not obvious to the most important people. In 2019, the Ontario provincial government announced cuts of $670 million to OSAP, the Ontario Student Assistance Program, which provides financial aid through loans and grants to lower-income students. While they justified it through a 10% tuition reduction, the reduction in grants was much more significant, forcing students to shoulder more crippling student debt to finance their education.</p>
-Breaking down the obstacles faced by gender found that the majority of obstacles were reported by women. In particular, child care had the greatest disproportionate effect. Of those who said caring for children was an obstacle, a 93% of them were women, while women only made up 54% of the sample. Similarly, caring for children was an issue that primarily affected students aged 25 and over.
-<div class="figure"><span id="fig:unnamed-chunk-10"></span>
-<img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-10-1.png" alt="Women are more likely to face child care as an obstacle" width="672" />
+<p>This is not all together surprising, given the rising costs of higher education across Canada. According to Statistics Canada, in 2015, 50% of students graduated with some form of student debt (Statistics Canada).
+If anything, the finding that education is a financial burden for students probably seem like it should be common knowledge at this point, but evidently it is still not obvious to the most important people. In 2019, the Ontario provincial government announced cuts of $670 million to OSAP, the Ontario Student Assistance Program, which provides financial aid through loans and grants to lower-income students (CBC). While they justified it through a 10% tuition reduction, the reduction in grants was much more significant, forcing students to shoulder more crippling student debt to finance their education.</p>
+<div class="figure"><span id="fig:unnamed-chunk-9"></span>
+<img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-9-1.png" alt="Women are more likely to face obstacles than men" width="672" />
 <p class="caption">
-Figure 4: Women are more likely to face child care as an obstacle
+Figure 4: Women are more likely to face obstacles than men
 </p>
 </div>
-<div class="figure"><span id="fig:unnamed-chunk-11"></span>
-<img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-11-1.png" alt="Child care is a greater issue for older students" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-10-1.png" alt="The data suggests women are more likely to face child care as an obstacle" width="672" />
 <p class="caption">
-Figure 5: Child care is a greater issue for older students
+Figure 5: The data suggests women are more likely to face child care as an obstacle
+</p>
+</div>
+<p>Breaking down the obstacles faced by gender found that the majority of obstacles were reported by women. In particular, child care had the greatest disproportionate effect. Of those who said caring for children was an obstacle, a 93% of them were women, while women only made up 54% of the sample. Similarly, caring for children was an issue that primarily affected students aged 25 and over.</p>
+<div class="figure"><span id="fig:unnamed-chunk-12"></span>
+<img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-12-1.png" alt="Students over 25 are more likely to face obstacles" width="672" />
+<p class="caption">
+Figure 6: Students over 25 are more likely to face obstacles
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-13"></span>
+<img src="/post/2020-09-25-financial-situation_files/figure-html/unnamed-chunk-13-1.png" alt="Child care is a greater issue for older students" width="672" />
+<p class="caption">
+Figure 7: Child care is a greater issue for older students
 </p>
 </div>
 </div>
@@ -281,7 +177,7 @@ Figure 5: Child care is a greater issue for older students
 Economically speaking, perhaps they are a less promising investment, as they have less years to deliver “returns”.</p>
 <div id="weaknesses-and-next-steps" class="section level2">
 <h2>Weaknesses and next steps</h2>
-<table class="table table-striped table-hover table-condensed" style="">
+<table class="table table-striped table-condensed" style="">
 <thead>
 <tr>
 <th style="text-align:left;">

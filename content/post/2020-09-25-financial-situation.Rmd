@@ -76,7 +76,7 @@ table <- table %>% kbl(caption = "Student Demographics", align = c("lrr")) %>% p
 # obstacles_table <- obstacles_data %>%  group_by(obstacles) %>% summarise(n=n()) %>% mutate(prop=paste(round(n/nrow(student_data), 2)*100, "%"))  
 # 
 # # counting specific obstacles
-# what_obstacles_data <- student_data %>% filter(obstacles_future_edu!= "NA") 
+what_obstacles_data <- student_data %>% filter(obstacles_future_edu!= "NA") 
 # what_obstacles_table <- what_obstacles_data %>% group_by(obstacles_future_edu)%>% summarise(n=n()) %>% mutate(prop=paste(round(n/nrow(what_obstacles_data), 2)*100, "%")) 
 
 # # making one big fancy table
