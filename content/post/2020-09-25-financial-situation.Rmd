@@ -96,7 +96,6 @@ table <- table %>% kbl(caption = "Student Demographics", align = c("lrr")) %>% p
 ```
 
 ```{r, echo= FALSE}
-
 table
 ```
 #Discussion
