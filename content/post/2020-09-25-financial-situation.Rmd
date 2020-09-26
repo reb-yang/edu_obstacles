@@ -6,8 +6,8 @@ header-includes:
   - \usepackage{booktabs}
   - \usepackage{subfig}
 slug: financial-situation-is-greatest-obstacle
-categories: []
-tags: []
+categories: ["R"]
+tags: ["R"]
 output: blogdown::html_page
 
 
@@ -17,46 +17,44 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(dplyr)
 library(kableExtra)
-library(gridExtra)
 
 ```
 
 
 # Abstract 
-Many Canadian students have aspirations for higher levels of education, but do not always believe that it is likely to achieve them. This research studied the obstacles they face in obtaining their desired level of education as reported in the 2016 General Social Survey conducted by Statistics Canada. It found that financial situation was the most common obstacle and the majority of obstacles were reported by women. These findings reiterate the existence of roadblocks in attaining education and the importance for government funding and financial aid to make education accessible for all students. 
+Many Canadian students have aspirations for higher levels of education, but do not always believe that it is likely to achieve them. This research studied the obstacles they face in obtaining their desired level of education as reported in the 2016 General Social Survey conducted by Statistics Canada. It found that financial situation was the most common obstacle and women were more likely to face obstacles. These findings reiterate the existence of roadblocks in attaining education and the importance for government funding and financial aid to make education accessible for all students. 
 
 # Introduction 
 
 First paragraph: General. Motivational. Majors specific finding. 
 
-"Stay in school, kids". This mantra has been preached to children for generations, instilling in them the idea that education is the key to social mobility, financial security, and a stable future. This holds even more true for post-secondary education. The 2016 Canadian census reported that men and women with a bachelor’s degree earned 47.2% and 58% more, respectively, than their counterparts with only high school diplomas (Statistics Canada). However, while society has made education very desirable, the question of whether or not it is attainable for all students remains. It was found that nearly a third  of students reported facing obstacles in getting education. Perhaps unsurprisingly, the most commonly identified obstacle was financial situation, with 68% of responses. 
+"Stay in school, kids". This mantra has been preached to children for generations, instilling in them the idea that education is the key to social mobility, financial security, and a stable future. This holds even more true for post-secondary education. The 2016 Canadian census reported that men and women with a bachelor’s degree earned 47.2% and 58% more, respectively, than their counterparts with only high school diplomas (Statistics Canada). However, while society has made education very desirable, the question of whether or not it is attainable for all students remains. It was found that nearly a third of students reported facing obstacles in getting education.Perhaps unsurprisingly, the most commonly identified obstacle was financial situation, with 68% of responses. 
 
-Second paragraph: More about what you did and found.
+Many students reported a difference in their desired level of education and the level of education they believed they were likely to complete. While non-college certificate programs and trade schools seemed to be considered relatively realistic options, Master's and Ph.D. degrees were perceived to be less attainable.The disconnect between students’ aspirations and what they believed possible warranted further investigation into what exactly is standing between them and their desired education and whether or not obstacles are the same across different groups. Newfoundland and Labrador was found to have the lowest percentage of students facing obstacles, while New Brunswick had the highest. Women and students over 25 were found to be more likely to face obstacles than men and students under 25. In addition, there are suggestions that the obstacle of caring for children disproportionately affects women over the age of 25. 
 
-Many students reported a difference in their desired level of education and the level of education they believed they were likely to complete. While non-college certificate programs and trade schools seemed to be considered relatively realistic options, Master's and Ph.D. degrees were perceived to be less attainable.The disconnect between students’ aspirations and what they believed possible warranted further investigation into what exactly is standing between them and their desired education and whether or not obstacles are the same across different groups. Women and students over 25 were found to be more likely to face obstacles than men and students under 25. In addition, there are suggestions that the obstacle of caring for children disproportionately affect women over the age of 25. 
-
-That being said, it's important to bear in mind the limitations of these findings. The data used was from a survey that was targeted towards all Canadians, so students were only a subset of the full sample. Consequently, when the data was broken down by the different obstacles and compared between different groups, some of the sample sizes, specifically for the obstacle of child care, became very small (n<30). As such, those findings should be taken with a grain of salt and merely serve as a conversation starter and the impetus for further research and investigation. A survey targeted towards students about the obstacles they face and ways they can be best supported, perhaps with particular focus on women with children, is the logical next step in bridging the gap between students’ educational hopes and realities. 
+That being said, it's important to bear in mind the limitations of these findings. The data used was from a survey that was targeted towards all Canadians, so students were only a subset of the full sample. Consequently, when the data was broken down by the different obstacles and compared between different groups, some of the sample sizes, specifically for the obstacle of child care, became very small (n<30). In addition, responses were not weighted as they usually are for probability surveys. As such, these findings should be taken with a grain of salt and merely serve as a conversation starter and the impetus for further research and investigation. A survey with a larger sample size, targeted towards students about how they can be best supported, perhaps with particular focus on women with children, is the logical next step in bridging the gap between students’ educational hopes and realities. 
 
 # Data
 
-The data used is from the General Social Survey (GSS), a survey conducted annually by Statistics Canada in order to gain insight into Canadians’ social lives, habits, views, and well-being, and usually focuses on a particular aspect each year. This analysis makes use of the 2016 iteration of the GSS, which focused on “Canadians at Work and Home”. The target population was residents of Canada, except for the Yukon, Northwest Territories, and Nunavut, aged 15 and over that were not institutionalized. It followed a stratified sampling design with 2 frames, the Address book and phone numbers (Statistics Canada). 
+The data used is from the General Social Survey (GSS), a survey conducted annually by Statistics Canada in order to gain insight into Canadians’ social lives, habits, views, and well-being, and usually focuses on a particular aspect each year. This analysis makes use of the 2016 iteration of the GSS, which focused on “Canadians at Work and Home”. The target population was residents of Canada, except for the Yukon, Northwest Territories, and Nunavut, aged 15 and over that were not institutionalized. It followed a stratified sampling design based on geographic area and the frame was constructed with the Address Register and telephone number records (Statistics Canada). 
 
 This study focuses on individuals who reported that their main activity was going to school. They were identified as students and asked specific questions about their educational plans and goals. For the purposes of this study, non-college certificates, private business programs, trade school programs, and the like were considered together as a group. Students over the age of 25 were also considered together as one age group. 
 
 The variables of interest were the following:
 
+* province 
+* sex
+* age_group
 * likely_future_edu: the level of education the respondent thought they were likely to attain (High School Diploma/Equivalent, Non-college Certificate, Professional (i.e. Medicine), Ph.D., College/CEGEP, Master's, Bachelor's, Other)
 * desired_future_edu: the level of education the respondent desired to attain
-* sex: Male, Female
-* age_group: 15 to 24, 25 and over
 * obstacles: whether or not the respondent faced obstacles in attaining their desired education
 * obstacles_future_edu: if respondents responded "yes" to the above question, they were asked to identify the specific obstacles
 
-At a glance, the respondents were 54% female and 46% male, with 77% between the ages of 15 and 24 and 23% aged over 25. 
+At a glance, the respondents were 54% female and 46% male, with 77% between the ages of 15 and 24 and 23% aged over 25. Students from Ontario were the most represented, comprising 30% of the sample. 
 ```{r, include= FALSE }
 # tables 
 
-mycols <- c("seagreen2", "dodgerblue","orchid2", "slateblue2",  "darkturquoise", "salmon1") # my color palette
+mycols <- c("seagreen2", "dodgerblue","orchid2", "slateblue2",  "darkturquoise", "salmon1", "darkorchid1", "cadetblue2", "gold", "coral2") # my color palette
 
 student_data <- read_csv("student_data.csv")  %>% mutate(age_group = ifelse(age_group == "15 to 24 years", "15 to 24 years", "25 and over")) %>% mutate(obstacles_future_edu = ifelse(obstacles_future_edu == "Other - Specify", "Other", obstacles_future_edu)) # loading data
 
@@ -66,31 +64,10 @@ sex_table <- student_data %>% group_by(sex) %>% count() %>% mutate(prop=paste(ro
 # counting age group
 age_table <- student_data %>% group_by(age_group) %>% count() %>% mutate(prop=paste(round(n/nrow(student_data), 2)*100, "%")) 
 
-table <- rbind(sex_table, age_table %>% rename(sex = age_group)) 
+prv_table <- student_data %>% group_by(province) %>% count() %>% mutate(prop=paste(round(n/nrow(student_data), 2)*100, "%"))
+table <- rbind(sex_table, age_table %>% rename(sex = age_group), prv_table %>% rename(sex = province)) 
 colnames(table) <- c("Variable", "Number of Respondents", "Proportion")
-table <- table %>% kbl(caption = "Student Demographics", align = c("lrr")) %>% pack_rows("Sex", 1, 2) %>% pack_rows("Age Group", 3, 4)  %>% kable_styling(bootstrap_options = c("condensed", "striped"))
-
-
-# counting obstacles
-# obstacles_data <- student_data %>% filter(obstacles != "NA") 
-# obstacles_table <- obstacles_data %>%  group_by(obstacles) %>% summarise(n=n()) %>% mutate(prop=paste(round(n/nrow(student_data), 2)*100, "%"))  
-# 
-# # counting specific obstacles
-what_obstacles_data <- student_data %>% filter(obstacles_future_edu!= "NA") 
-# what_obstacles_table <- what_obstacles_data %>% group_by(obstacles_future_edu)%>% summarise(n=n()) %>% mutate(prop=paste(round(n/nrow(what_obstacles_data), 2)*100, "%")) 
-
-# # making one big fancy table
-# big_table <- rbind(sex_table, (age_table %>% rename(sex = age_group)), (obstacles_table %>% rename(sex = obstacles)), (what_obstacles_table %>% rename(sex = obstacles_future_edu)))
-#  
-# 
-# c1 <- c("Sex", "Sex", "Age Group", "Age Group", rep("Obstacles", 9))
-# c2 <- c("Female", "Male", "15 to 24 years", "25 and over", "Don't know", "No", rep("Yes", 7))
-# c3 <- c("", "", "", "" , "", "", "", what_obstacles_table$obstacles_future_edu)
-# 
-# big <- cbind(c1, c2, c3, big_table$n, big_table$prop)
-# colnames(big) <- c("Variable", "", "", "Number of Respondents", "Proportion")
-# big_table <- kbl(big, caption = "Summary Statistics", align = c("lllrr")) %>% 
-#      collapse_rows(columns = 1:2, valign = "top") %>% kable_styling(bootstrap_options = c("condensed", "striped"))
+table <- table %>% kbl(caption = "Student Demographics", align = c("lrr")) %>% pack_rows("Sex", 1, 2) %>% pack_rows("Age Group", 3, 4) %>% pack_rows("Province", 5, 14) %>% kable_styling(bootstrap_options = c("condensed", "striped"))
 
 
 ```
@@ -98,7 +75,7 @@ what_obstacles_data <- student_data %>% filter(obstacles_future_edu!= "NA")
 ```{r, echo= FALSE}
 table
 ```
-#Discussion
+
 
 
 ```{r, include=FALSE}
@@ -128,7 +105,7 @@ The following graph compares the percentage of students who would like to attain
 
 But if education is such a good thing, what is stopping students from getting the level of education they want? 
 
-When asked if they faced obstacles in obtaining education, 31% of students responded “Yes”. Financial situation was overwhelmingly identified as the main obstacle students faced, comprising 68% of responses. Other obstacles identified included the length of time the program requires (5%), the inability to get into a program (6%), personal health (5%), and having to care for children (4%). 
+When asked if they faced obstacles in obtaining education, 31% of students responded “Yes”. At the provincial level, 37% of students in New Brunswick responded similarly, followed closely by 36% and 35% of students in Prince Edward Island and Quebec, respectively. Meanwhile only 18% of students in Newfoundland and Labrador reported facing obstacles. Their exceptionally low rate is interesting, especially considering the fact that Newfoundland and Labrador replaced provincial student loans with grants in 2015 (CBC). 
 ```{r, include = FALSE}
 
 # proportion of students facing obstacles 
@@ -137,21 +114,35 @@ future_obstacles <- student_data %>% filter(obstacles != "NA") %>% group_by(obst
 
 # specific obstacles faced 
 
-what_obstacles <- what_obstacles_data %>% mutate(obstacles_future_edu = ifelse(obstacles_future_edu == "Other - Specify", "Other", obstacles_future_edu)) %>% group_by(obstacles_future_edu) %>% summarise(prop = n()*100/nrow(what_obstacles_data)) 
+what_obstacles_data <- student_data %>% filter(obstacles_future_edu != "NA")
+what_obstacles <- what_obstacles_data  %>% mutate(obstacles_future_edu = ifelse(obstacles_future_edu == "Other - Specify", "Other", obstacles_future_edu)) %>% group_by(obstacles_future_edu) %>% summarise(prop = n()*100/nrow(what_obstacles_data)) 
 
-what_obstacles <- what_obstacles %>% ggplot(aes(y = obstacles_future_edu, x = prop)) + geom_bar(stat = "identity", position = "dodge", fill = mycols)+ theme_minimal() + labs(y = "Obstacles", x = "Percentage of Responses (%)") + ggtitle("Obstacles Faced in Obtaining Desired Education") + theme(plot.title = element_text(hjust = 0.5))  + geom_text(aes(label = paste(round(prop), "%")), size = 4, hjust = -0.2) + scale_x_continuous(limits = c(0, 80))
+what_obstacles <- what_obstacles %>% ggplot(aes(y = obstacles_future_edu, x = prop)) + geom_bar(stat = "identity", position = "dodge", fill = mycols[1:6])+ theme_minimal() + labs(y = "Obstacles", x = "Percentage of Responses (%)") + ggtitle("Obstacles Faced in Obtaining Desired Education") + theme(plot.title = element_text(hjust = 0.5))  + geom_text(aes(label = paste(round(prop), "%")), size = 4, hjust = -0.2) + scale_x_continuous(limits = c(0, 80))
+
+# obstacles by province
+
+
+prv_obstacles <- cbind(student_data %>% filter(obstacles == "Yes") %>% group_by(province) %>% summarise(n=n()), total = prv_table$n) %>% mutate(prop = n*100/total) %>% ggplot(aes(x = prop, y=province)) + geom_bar(stat = "identity", fill = mycols)  + theme_minimal()  + labs(x = "Percentage Facing Obstacles (%)", y = "Province") + ggtitle("Do You Face Obstacles in Obtaining Your Desired Education?") + theme(plot.title = element_text(hjust = 0.5))  + geom_text(aes(label = paste(round(prop), "%")), size = 3.5, hjust = -0.1) + scale_x_continuous(limits = c(0,50)) 
+
+
 ```
 
 ```{r, echo = FALSE, fig.cap = "Students were asked if they faced obstacles in obtaining education"}
 future_obstacles 
 
 ```
-
+```{r, echo = FALSE, fig.cap = "Percentage of students facing obstacles varies across provinces"}
+prv_obstacles 
+```
+Financial situation was overwhelmingly identified as the main obstacle students faced, comprising 68% of responses. Other obstacles identified included the length of time the program requires (5%), the inability to get into a program (6%), personal health (5%), and having to care for children (4%). 
 ```{r, echo = FALSE, fig.cap = "Students were asked to identity the obstacles they faced "}
 what_obstacles
 ```
 This is not all together surprising, given the rising costs of higher education across Canada. According to Statistics Canada, in 2015, 50% of students graduated with some form of student debt (Statistics Canada). 
-If anything, the finding that education is a financial burden for students probably seem like it should be common knowledge at this point, but evidently it is still not obvious to the most important people. In 2019, the Ontario provincial government announced cuts of $670 million to OSAP, the Ontario Student Assistance Program, which provides financial aid through loans and grants to lower-income students (CBC). While they justified it through a 10% tuition reduction, the reduction in grants was much more significant, forcing students to shoulder more crippling student debt to finance their education. 
+
+If anything, the finding that education is a financial burden for students probably seems like it should be common knowledge at this point, but evidently it is still not obvious to the most important people. In 2019, the Ontario provincial government announced cuts of $670 million to OSAP, the Ontario Student Assistance Program, which provides financial aid through loans and grants to lower-income students (CBC). While they justified it through a 10% tuition reduction, the reduction in grants was much more significant, forcing students to shoulder more crippling student debt to finance their education. 
+
+Breaking obstacles down by gender, women were found to be more likely to face obstacles than males. Thirty-six percent (36%) of females reported facing obstacles, compared to 26% of males. 
 
 ```{r, include = FALSE}
 # comparing obstacles for men and women
@@ -177,6 +168,7 @@ obstacles_sex_2 <- sex2 %>% ggplot(aes(y=reorder(obstacles_future_edu, prop), x 
 ```{r, echo = FALSE, fig.cap = "Women are more likely to face obstacles than men"}
 obstacles_sex_1
 ```
+Of those students that faced obstacles, males and females were equally likely to face financial obstacles. The most notable difference was in child care, which comprised 6% of female students' obstacles, compared to only 1% for males (*See weaknesses). 
 ```{r, echo = FALSE, fig.cap = "The data suggests women are more likely to face child care as an obstacle"}
 obstacles_sex_2
 ```
@@ -189,7 +181,7 @@ young1<- nrow(student_data %>% filter(age_group == "15 to 24 years", obstacles!=
 old1<- nrow(student_data  %>% filter(age_group  == "25 and over", obstacles!= "NA"))
 age1 <- student_data  %>% filter(obstacles!= "NA") %>% group_by(age_group, obstacles) %>% count() %>% summarise(prop = ifelse(age_group == "15 to 24 years", 100*n/young1, 100*n/old1))
 
-obstacles_age_1 <- age1 %>% filter(obstacles == "Yes") %>% ggplot(aes(y=age_group, x = prop)) + geom_bar(stat = "identity", position = "dodge", fill = mycols[4:5], width = 0.5) + theme_minimal() + labs(title = "Do Different Age Groups Face the Same Obstacles?", y = "", x = "Percentage Affected (%)") + scale_fill_manual(values = mycols[4:5]) + geom_text(aes(label = paste0(round(prop),"%")), position = position_dodge(width = 1), hjust= -0.25, size = 3.5) + scale_x_continuous(limits = c(0, 60))  + theme(plot.title = element_text(hjust = 0.5))
+obstacles_age_1 <- age1 %>% filter(obstacles == "Yes") %>% ggplot(aes(y=age_group, x = prop)) + geom_bar(stat = "identity", position = "dodge", fill = mycols[4:5], width = 0.5) + theme_minimal() + labs(title = "Are Certain Age Groups More Likely to Face Obstacles?", y = "", x = "Percentage Facing Obstacles (%)") + scale_fill_manual(values = mycols[4:5]) + geom_text(aes(label = paste0(round(prop),"%")), position = position_dodge(width = 1), hjust= -0.25, size = 3.5) + scale_x_continuous(limits = c(0, 60))  + theme(plot.title = element_text(hjust = 0.5))
 
 young2<- nrow(student_data  %>% filter(age_group == "15 to 24 years", obstacles_future_edu != "NA"))
 old2 <- nrow(student_data  %>% filter(age_group  == "25 and over", obstacles_future_edu != "NA"))
@@ -203,29 +195,20 @@ obstacles_age_2 <- age2 %>% ggplot(aes(y=reorder(obstacles_future_edu, prop), x 
 
 ```
 
-Breaking down the obstacles faced by gender found that the majority of obstacles were reported by women. In particular, child care had the greatest disproportionate effect. Of those who said caring for children was an obstacle, a 93% of them were women, while women only made up 54% of the sample. Similarly, caring for children was an issue that primarily affected students aged 25 and over. 
+In comparing age groups, 52% of students aged 25 and over faced obstacles, while only 25% of students aged 15 to 24 faced obstacles. 
 
 ```{r, echo = FALSE, fig.cap = "Students over 25 are more likely to face obstacles"}
 obstacles_age_1
 ```
-
+Once again, both age groups were almost equally likely to be affected by financial obstacles. However, not being able to get into a program seemed to be a bigger obstacle for younger students. On the flip side, caring for children was primarily an obstacle for older students.
 ```{r, echo = FALSE, fig.cap = "Child care is a greater issue for older students"}
 obstacles_age_2
 ```
 
-# Discussion
+# Weaknesses and Other Things to Consider 
 
-My discussion... main findings of your graph.
+Given that students were not the target population of the survey and represent a small subset of the sample, this lead to weaknesses in the results. After breaking down the data to focus on students who faced obstacles and their specific obstacles, the sample sizes became very small (n < 30). For example, there were only 15 respondents who identified caring for children as an obstacle. The results from these small samples are not particularly concrete and thus should be considered with the appropriate weight. Nonetheless, they raise interesting points that could inform further research. 
 
-
-Features of your survey.... Non-response... etc. And how these could affect the results....
-
-Since the target population was all Canadians, not specifically students, it seems likely that mature students (over age 25) were over-represented in the sample. This may have influenced the results as people of different ages have different priorities and challenges in their respective lives. For example, financial situation was an obstacle for 68% of students aged 15-24, but only affected 50% of students aged 55-64. Child care was practically a nonexistent issue for students aged 15-45, but was an obstacle for 21% of 35-44 year olds. However, this can also be seen as a  benefit of this survey as it incorporates a portion of the student population that may otherwise be overlooked, instead of focusing on the  “typical” student. Of course, this depends on whether the aim is to help younger students. Education may be considered a better investment for younger students than students aged 55-65, for example. 
-
-It can be easy to forget about the mature student population, as they do not represent the "typical" student. However, this does not mean they should be left behind. 
-Economically speaking, perhaps they are a less promising investment, as they have less years to deliver "returns". 
-
-## Weaknesses and next steps
 ```{r, include = FALSE}
 total_table <- what_obstacles_data %>%  group_by(obstacles_future_edu) %>% summarise(n = n())
 female_table <- what_obstacles_data %>% filter(sex == "Female") %>%  group_by(obstacles_future_edu) %>% summarise(Female = n())
@@ -240,8 +223,19 @@ sex_table_obstacles  <- sex_table_obstacles  %>% kbl() %>% kable_styling(bootstr
 sex_table_obstacles 
 ```
 
-Given that students were not the target population of the survey and represent a small subset of the sample, there are obvious weaknesses with this analysis. After breaking down the data to focus on students who faced obstacles and their specific obstacles, the sample sizes became very small (n < 30). For example, there were only 15 respondents who identified caring for children as an obstacle.  As such, these findings should be taken with a grain of salt and merely serve as the impetus for further investigation and discussion. A survey targeted towards students about the obstacles they face and ways they can be best supported, perhaps with particular focus on women and childcare, is the logical next step in bridging the gap between students’ educational hopes and realities. 
+It should also be noted that the figures reported here were calculated using the raw data, which means that every response counts the same amount. Responses were not weighted, as is usually the case for probability surveys like the GSS (Statistics Canada). 
 
+Also, due to the structure of the survey, only respondents whose main activity was going to school were prompted to answer questions about their educational plans. As a result, the survey fails to account for the obstacles that prevent people from going to school at all. 
+
+# Next Steps 
+
+While health, length of program, and the limited spots in programs are pretty much insurmountable obstacles, the others are not (or at least, shouldn't be). In a future survey, it would be interesting find out more about people are not currently in school, but want to get an education, and the obstacles that those individuals face. Further research regarding the obstacle of child care would also be interesting. For example, is it largely a financial obstacle due to the costs of raising a child and child care services? 
+
+The survey should ideally be done at at a provincial level to account for the differences in education funding and regulations across provinces. A larger sample is also crucial for findings to be meaningful. Furthermore, stratified sampling plan would help optimize coverage and ensure representation for groups of different socioeconomic backgrounds. After all, no students deserve to be left behind. 
+
+# Acknowledgements
+
+Special thanks to Rohan Alexander, a man with impeccable taste in Taylor Swift songs, for his GSS cleaning code.
 
 # References
 - Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software,
@@ -261,3 +255,4 @@ https://sda-artsci-utoronto-ca.myaccess.library.utoronto.ca/cgi-bin/sda/hsda?har
 -  Hao Zhu (2020). kableExtra: Construct Complex Table with 'kable' and Pipe Syntax. R
   package version 1.2.1. https://CRAN.R-project.org/package=kableExtra
 - Alexander, Rohan (2020) gss_cleaning.R [Source code]. 
+- CBC/Radio Canada. (2015, August 3). Provincial student loans now replaced with grants in N.L. | CBC News. CBCnews. https://www.cbc.ca/news/canada/newfoundland-labrador/provincial-student-loans-now-replaced-with-grants-in-n-l-1.3177298. 
