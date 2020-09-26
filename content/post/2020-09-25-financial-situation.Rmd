@@ -46,12 +46,13 @@ The data used is from the General Social Survey (GSS), a survey conducted annual
 Individuals who reported that their main activity was going to school were identified as students and asked specific questions about their educational plans and goals. Non-college certificates, private business programs, trade school programs, and the like were considered together as "Non-college whatever". Students over the age of 25 were also considered together as one age group. 
 
 The variables of interest were the following:
-- likely_future_edu: the level of education the respondent thought they were likely to attain
-- desired_future_edu: the level of education the respondent desired to attain
-- sex
-- age_group
-- obstacles: whether or not the respondent faced obstacles in attaining their desired education
-- obstacles_future_edu: the specific obstacles identified by the respondents 
+
+* likely_future_edu: the level of education the respondent thought they were likely to attain
+* desired_future_edu: the level of education the respondent desired to attain
+* sex
+* age_group
+* obstacles: whether or not the respondent faced obstacles in attaining their desired education
+* obstacles_future_edu: the specific obstacles identified by the respondents   
 
 Summary statistics for these variables...
 ```{r, include= FALSE }
@@ -60,27 +61,31 @@ Summary statistics for these variables...
 student_data <- read_csv("student_data.csv")  %>% mutate(age_group = ifelse(age_group == "15 to 24 years", "15 to 24 years", "25 and over")) %>% mutate(obstacles_future_edu = ifelse(obstacles_future_edu == "Other - Specify", "Other", obstacles_future_edu)) # loading data
 
 sex_table <- student_data %>% group_by(sex) %>% count() %>% mutate(prop=paste(round(n/nrow(student_data), 2)*100, "%")) 
-colnames(sex_table) <- c("Sex", "Number of Students", "Proportion of Students")
-sex_table <- sex_table %>% kbl() %>% kable_styling() 
 
 obstacles_data <- student_data %>% filter(obstacles != "NA") 
 obstacles_table <- obstacles_data %>%  group_by(obstacles) %>% summarise(n=n()) %>% mutate(prop=paste(round(n/nrow(student_data), 2)*100, "%"))  
-colnames(obstacles_table) <- c("Obstacles", "Number of Students", "Proportion of Students")
-obstacles_table <- obstacles_table %>% kbl() %>% kable_styling() 
-
 
 what_obstacles_data <- student_data %>% filter(obstacles_future_edu!= "NA") 
 what_obstacles_table <- what_obstacles_data %>% group_by(obstacles_future_edu)%>% summarise(n=n()) %>% mutate(prop=paste(round(n/nrow(what_obstacles_data), 2)*100, "%")) 
-colnames(what_obstacles_table) <- c("Obstacles", "Number of Students", "Proportion of Students")
-what_obstacles_table <-what_obstacles_table %>% kbl() %>% kable_styling() 
+
+big_table <- rbind(sex_table, (obstacles_table %>% rename(sex = obstacles)), (what_obstacles_table %>% rename(sex = obstacles_future_edu)))
+ 
+c1 <- c("Sex", "Sex", rep("Obstacles", 9))
+c2 <- c("Female", "Male", "Don't know", "No", rep("Yes", 7))
+c3 <- c("", "", "", "" , "", what_obstacles_table$obstacles_future_edu)
+
+big <- cbind(c1, c2, c3, big_table$n, big_table$prop)
+colnames(big) <- c("Variable", "", "", "Number of Respondents", "Proportion")
+big_table <- kbl(big, caption = "Summary Statistics", align = c("lllrr")) %>% 
+     collapse_rows(columns = 1:2, valign = "top") %>% kable_styling(bootstrap_options = c("condensed"))
 
 ```
 
 ```{r, echo= FALSE}
-sex_table
-obstacles_table
-what_obstacles_table
+big_table
 ```
+
+
 
 You must include graphs.
 ```{r, include=FALSE}
@@ -133,7 +138,6 @@ obstacles_students <-  student_data %>% filter(obstacles== "Yes")
 
 sex_percent <- obstacles_students %>% filter(sex != "NA", obstacles_future_edu != "NA") %>% group_by(obstacles_future_edu)  %>% count(sex) %>%  mutate(ratio=n/sum(n)) %>% mutate(obstacles_future_edu = ifelse(obstacles_future_edu =="Other - Specify", "Other", obstacles_future_edu))
 
-
 obstacles_sex  <- sex_percent %>% ggplot(aes(y=obstacles_future_edu, x=ratio, fill = sex)) + geom_bar(position = "fill", stat = "identity")  + theme_minimal() + labs(y = "Obstacles", x = "", fill = "Sex") + ggtitle("Breakdown of Obstacles by Gender ") + theme(plot.title = element_text(hjust = 0.5)) + scale_fill_manual(values = c("deeppink", "dodgerblue")) + scale_x_continuous(labels = scales::percent) + geom_text(aes(label = paste0(round(ratio*100),"%")), position = position_stack(vjust = 0.5), size = 3, color = "white") 
 
 ```
@@ -166,8 +170,21 @@ Since the target population was all Canadians, not specifically students, it see
 
 
 ## Weaknesses and next steps
+```{r, include = FALSE}
+total_table <- what_obstacles_data %>%  group_by(obstacles_future_edu) %>% summarise(n = n())
+female_table <- what_obstacles_data %>% filter(sex == "Female") %>%  group_by(obstacles_future_edu) %>% summarise(Female = n())
+male_table <- what_obstacles_data %>% filter(sex == "Male") %>%  group_by(obstacles_future_edu) %>% summarise(Male = n())
+sex_table_obstacles  <- cbind(female_table, Male = male_table$Male, Total = total_table$n)
+colnames(sex_table_obstacles ) <- c("Obstacles", "Female", "Male", "Total")
+sex_table_obstacles  <- sex_table_obstacles  %>% kbl() %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"), position = "left") %>% column_spec(2, color = c("red", "black", rep("red", 4))) %>% column_spec(3, color = c("red", "black", rep("red", 4))) %>% column_spec(4, color = c("red", "black", "red", "black", "red", "red"))
 
-My weaknesses...
+```
+
+```{r, echo = FALSE}
+sex_table_obstacles 
+```
+
+Given that students were not the target population of the survey and represent a small subset of the sample, there are obvious weaknesses with this analysis. After breaking down the data to focus on students who faced obstacles and their specific obstacles, the sample sizes became very small (n < 30). For example, there were only 15 respondents who identified caring for children as an obstacle.  As such, these findings should be taken with a grain of salt and merely serve as the impetus for further investigation and discussion. A survey targeted towards students about the obstacles they face and ways they can be best supported, perhaps with particular focus on women and childcare, is the logical next step in bridging the gap between students’ educational hopes and realities. 
 
 
 # References
