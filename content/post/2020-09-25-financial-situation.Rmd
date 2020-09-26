@@ -2,10 +2,14 @@
 title: "Financial situation is greatest obstacle faced by Canadian students"
 author: "Rebecca Yang"
 date: '2020-09-25'
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{subfig}
 slug: financial-situation-is-greatest-obstacle
 categories: []
 tags: []
 output: blogdown::html_page
+
 
 ---
 ```{r setup, include=FALSE}
@@ -13,8 +17,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(dplyr)
 library(kableExtra)
-mycols <- c("springgreen1", "dodgerblue","deeppink", "slateblue2",  "cornflowerblue", "orchid2") # my color palette
+mycols <- c("seagreen2", "dodgerblue","orchid2", "slateblue2",  "darkturquoise", "salmon1") # my color palette
 ```
+
 
 # Abstract 
 Many Canadian students have aspirations for higher levels of education, but do not always believe that it is likely to achieve them. This research studied the obstacles they face in obtaining their desired level of education as reported in the 2016 General Social Survey conducted by Statistics Canada. It found that financial situation was the most common obstacle and the majority of obstacles were reported by women. These findings reiterate the existence of roadblocks in attaining education and the importance for government funding and financial aid to make education accessible for all students. 
@@ -30,13 +35,12 @@ Second paragraph: More about what you did and found.
 
 Many students reported a difference in their desired level of education and the level of education they believed they were likely to complete. The disconnect between students’ aspirations and what they believed possible warranted further investigation into what exactly is standing between them and their desired education. After all, since education is such a good thing, shouldn't students be able to get all the education they want? When asked if they faced obstacles in obtaining education, almost a third of students responded "Yes". Of those students, 68% identified financial situation as the leading obstacle. It was also found that the majority of respondents who reported facing obstacles were women over men. The breakdown of the specific obstacles faced varied between sexes and age groups as well. 
 
-Third paragraph: Outline of the paper. Future work. Weaknesses.
-Finally, some weaknesses of these findings must be acknowledged. The data used was from a survey that was targeted towards all Canadians, so students are only a subset of the full sample. Consequently, when the data was broken down by the different obstacles and compared between different groups, the sample sizes became very small (n<30). As such, these findings should be taken with a grain of salt and merely serve as the impetus for further discussion and investigation. A survey targeted towards students about the obstacles they face and ways they can be best supported is the logical next step in bridging the gap between students’ educational hopes and realities. 
+Some weaknesses of these findings should be acknowledged. The data used was from a survey that was targeted towards all Canadians, so students are only a subset of the full sample. Consequently, when the data was broken down by the different obstacles and compared between different groups, the sample sizes became very small (n<30). As such, these findings should be taken with a grain of salt and merely serve as the impetus for further discussion and investigation. A survey targeted towards students about the obstacles they face and ways they can be best supported is the logical next step in bridging the gap between students’ educational hopes and realities. 
 
 
 
 It seems counterintuitive to promote education as a society while still having such high barriers to postsecondary education. 
-The financial burden of postsecondary education may seem like common knowledge at this point, but apparently it has not gotten through the most important people. In 2019, the Ontario provincial government announced cuts of $670 million to OSAP, the Ontario Student Assistance Program. While they justified it through a 10% tuition reduction, student aid packages were reduced by much more, and grants were replaced by repayable loans. 
+
 
 
 # Data
@@ -62,22 +66,24 @@ student_data <- read_csv("student_data.csv")  %>% mutate(age_group = ifelse(age_
 
 sex_table <- student_data %>% group_by(sex) %>% count() %>% mutate(prop=paste(round(n/nrow(student_data), 2)*100, "%")) 
 
+age_table <- student_data %>% group_by(age_group) %>% count() %>% mutate(prop=paste(round(n/nrow(student_data), 2)*100, "%")) 
+
 obstacles_data <- student_data %>% filter(obstacles != "NA") 
 obstacles_table <- obstacles_data %>%  group_by(obstacles) %>% summarise(n=n()) %>% mutate(prop=paste(round(n/nrow(student_data), 2)*100, "%"))  
 
 what_obstacles_data <- student_data %>% filter(obstacles_future_edu!= "NA") 
 what_obstacles_table <- what_obstacles_data %>% group_by(obstacles_future_edu)%>% summarise(n=n()) %>% mutate(prop=paste(round(n/nrow(what_obstacles_data), 2)*100, "%")) 
 
-big_table <- rbind(sex_table, (obstacles_table %>% rename(sex = obstacles)), (what_obstacles_table %>% rename(sex = obstacles_future_edu)))
+big_table <- rbind(sex_table, (age_table %>% rename(sex = age_group)), (obstacles_table %>% rename(sex = obstacles)), (what_obstacles_table %>% rename(sex = obstacles_future_edu)))
  
-c1 <- c("Sex", "Sex", rep("Obstacles", 9))
-c2 <- c("Female", "Male", "Don't know", "No", rep("Yes", 7))
-c3 <- c("", "", "", "" , "", what_obstacles_table$obstacles_future_edu)
+c1 <- c("Sex", "Sex", "Age Group", "Age Group", rep("Obstacles", 9))
+c2 <- c("Female", "Male", "15 to 24 years", "25 and over", "Don't know", "No", rep("Yes", 7))
+c3 <- c("", "", "", "" , "", "", "", what_obstacles_table$obstacles_future_edu)
 
 big <- cbind(c1, c2, c3, big_table$n, big_table$prop)
 colnames(big) <- c("Variable", "", "", "Number of Respondents", "Proportion")
 big_table <- kbl(big, caption = "Summary Statistics", align = c("lllrr")) %>% 
-     collapse_rows(columns = 1:2, valign = "top") %>% kable_styling(bootstrap_options = c("condensed"))
+     collapse_rows(columns = 1:2, valign = "top") %>% kable_styling(bootstrap_options = c("condensed", "striped"))
 
 ```
 
@@ -100,12 +106,12 @@ future_education_data <- rbind(likely_students, desired_students)
 
 # plot of proportions of students' desired and likely 
 
-future_edu_props <-  future_education_data %>% ggplot(aes(y =reorder(edu_level, prop ), x=prop, fill = future_edu)) + geom_bar(stat = "identity", position = "dodge") + scale_fill_manual(values=mycols) + theme_minimal()  + labs(x="Percentage of Responses (%)", y = "Education Level", fill = "") + ggtitle("Students' Desired vs. Likely Future Education Levels") + theme(plot.title = element_text(hjust = 0.5))  + geom_text(aes(label = paste(round(prop), "%")), size = 2.4, position = position_dodge(width = 1), hjust = -0.15) + scale_y_discrete( labels = c("Other", "High School Diploma/Equivalent", "Non-college Certificate", "Professional (i.e. MD)" , "Ph.D." , "College/CEGEP", "Master's", "Bachelor's" )) + scale_x_continuous(limits = c(0, 40))
+future_edu_props <-  future_education_data %>% ggplot(aes(y =reorder(edu_level, prop ), x=prop, fill = future_edu)) + geom_bar(stat = "identity", position = "dodge") + scale_fill_manual(values=mycols) + theme_minimal()  + labs(title = "Students' Desired vs. Likely Education Levels", x="Percentage of Responses (%)", y = "Education Level", fill = "")  + theme(plot.title = element_text(hjust = 0.5))  + geom_text(aes(label = paste(round(prop), "%")), size = 2.7, position = position_dodge(width = 1), hjust = -0.1) + scale_y_discrete( labels = c("Other", "High School Diploma/Equivalent", "Non-college Certificate", "Professional (i.e. MD)" , "Ph.D." , "College/CEGEP", "Master's", "Bachelor's" )) + scale_x_continuous(limits = c(0, 40))
 
 
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, fig.cap = "A comparison of students' desired and likely education levels"}
 future_edu_props
 ```
 
@@ -128,34 +134,50 @@ what_obstacles <- what_obstacles %>% ggplot(aes(y = obstacles_future_edu, x = pr
 
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, fig.width = 2.5, fig.cap = "Students were asked if they faced obstacles in obtaining education"}
 future_obstacles
+
+```
+
+```{r, echo = FALSE, fig.cap = "Students were asked to identity the obstacles they faced "}
 what_obstacles
 ```
+
 ```{r, include = FALSE}
 obs_n <- nrow(obstacles_data)
 obstacles_students <-  student_data %>% filter(obstacles== "Yes")
 
-sex_percent <- obstacles_students %>% filter(sex != "NA", obstacles_future_edu != "NA") %>% group_by(obstacles_future_edu)  %>% count(sex) %>%  mutate(ratio=n/sum(n)) %>% mutate(obstacles_future_edu = ifelse(obstacles_future_edu =="Other - Specify", "Other", obstacles_future_edu))
+fem<- nrow(obstacles_students %>% filter(sex == "Female", obstacles_future_edu != "NA"))
+male <- nrow(obstacles_students %>% filter(sex == "Male", obstacles_future_edu != "NA"))
+sex <- obstacles_students %>% filter(obstacles_future_edu != "NA") %>% group_by(sex, obstacles_future_edu) %>% count() %>% summarise(prop = ifelse(sex=="Male", 100*n/male, 100*n/fem))
 
-obstacles_sex  <- sex_percent %>% ggplot(aes(y=obstacles_future_edu, x=ratio, fill = sex)) + geom_bar(position = "fill", stat = "identity")  + theme_minimal() + labs(y = "Obstacles", x = "", fill = "Sex") + ggtitle("Breakdown of Obstacles by Gender ") + theme(plot.title = element_text(hjust = 0.5)) + scale_fill_manual(values = c("deeppink", "dodgerblue")) + scale_x_continuous(labels = scales::percent) + geom_text(aes(label = paste0(round(ratio*100),"%")), position = position_stack(vjust = 0.5), size = 3, color = "white") 
+obstacles_sex <- sex %>% ggplot(aes(y=reorder(obstacles_future_edu, prop), x = prop, fill = sex)) + geom_bar(stat = "identity", position = "dodge") + theme_minimal() + labs(title = "Do Men and Women Face the Same Obstacles?", y = "", x = "Percentage Affected (%)", fill = "Sex") + scale_fill_manual(values = c("orchid2", "dodgerblue")) + geom_text(aes(label = paste0(round(prop),"%")), position = position_dodge(width = 1), hjust= -0.25, size = 3.5) + scale_x_continuous(limits = c(0, 80))
 
 ```
 
 
-This is unsurprising given the rising costs of higher education across Canada. According to Statistics Canada, in 2015, 50% of students graduated with student debt. And it doesn't look like it's getting more affordable/ 
-The financial burden of postsecondary education is compounded by cuts to government funding for low-income students. In 2019, the Ontario Student Assistant Plan (OSAP) was cut by $670 million, leading to a reduction in grants and forcing students to take on student debt to finance their education. 
+This is unsurprising given the rising costs of higher education across Canada. According to Statistics Canada, in 2015, 50% of students graduated with some form of student debt. 
+
+
+The finding that the financial burden of post-secondary education is an obstacle for students may seem like common knowledge, but evidently it is still not obvious to the most important people. In 2019, the Ontario provincial government announced cuts of $670 million to OSAP, the Ontario Student Assistance Program, which provides financial aid through loans and grants to lower-income students. While they justified it through a 10% tuition reduction, the reduction in grants was much more significant, forcing students to shoulder more crippling student debt to finance their education. 
+
+
 ```{r, include = FALSE}
-age_percent <- obstacles_students %>% filter(age_group != "NA", obstacles_future_edu != "NA") %>% group_by(obstacles_future_edu)  %>% count(age_group) %>%  mutate(ratio=n/sum(n)) %>% mutate(obstacles_future_edu = ifelse(obstacles_future_edu =="Other - Specify", "Other", obstacles_future_edu))
+young<- nrow(obstacles_students %>% filter(age_group == "15 to 24 years", obstacles_future_edu != "NA"))
+old <- nrow(obstacles_students %>% filter(age_group  == "25 and over", obstacles_future_edu != "NA"))
+age <- obstacles_students %>% filter(obstacles_future_edu != "NA") %>% group_by(age_group, obstacles_future_edu) %>% count() %>% summarise(prop = ifelse(age_group == "15 to 24 years", 100*n/young, 100*n/old))
 
-obstacles_age <-age_percent %>% ggplot(aes(y=obstacles_future_edu, x=ratio, fill = age_group)) + geom_bar(position = "fill", stat = "identity") + scale_x_continuous(labels = scales::percent) + geom_text(aes(label = paste0(round(ratio*100),"%")), position = position_stack(vjust = 0.5), size = 3.5, color = "white") + theme_minimal() + labs(y = "Obstacles", x = "", fill = "Age Group") + ggtitle("Breakdown of Obstacles by Age Group ") + theme(plot.title = element_text(hjust = 0.5)) + scale_fill_manual(values = mycols)
+obstacles_age <- age %>% ggplot(aes(y=reorder(obstacles_future_edu, prop), x = prop, fill = age_group)) + geom_bar(stat = "identity", position = "dodge") + theme_minimal() + labs(title = "Do Different Age Groups Face the Same Obstacles?", y = "", x = "Percentage Affected (%)", fill = "Age Group") + scale_fill_manual(values = mycols[4:5]) + geom_text(aes(label = paste0(round(prop),"%")), position = position_dodge(width = 1), hjust= -0.25, size = 3.5) + scale_x_continuous(limits = c(0, 80))
+obstacles_age
 
 ```
 
-Breaking down the obstacles faced by gender found that the majority of obstacles were reported by women. In particular, child care had the greatest disproportionate effect. Of those who said caring for children was an obstacle, a whopping 93% of them were women (*See weaknesses)
-```{r, echo = FALSE}
+Breaking down the obstacles faced by gender found that the majority of obstacles were reported by women. In particular, child care had the greatest disproportionate effect. Of those who said caring for children was an obstacle, a 93% of them were women, while women only made up 54% of the sample. Similarly, caring for children was an issue that primarily affected students aged 25 and over. 
+```{r, echo = FALSE, fig.cap = "Women are more likely to face child care as an obstacle"}
 obstacles_sex  
-obstacles_age 
+```
+```{r, echo = FALSE, fig.cap = "Child care is a greater issue for older students"}
+obstacles_age
 ```
 
 # Discussion
@@ -190,6 +212,9 @@ Given that students were not the target population of the survey and represent a
 # References
 - Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software,
   4(43), 1686, https://doi.org/10.21105/joss.01686
+- Statistics Canada. 2020. "Half of recent postsecondary graduates had student debt prior to the pandemic." The Daily. July 28. Statistics Canada Catalogue no. 11-001-XIE.
+http://www.statcan.ca/Daily/English/040728/d040728a.htm (accessed August 16, 2005).
+- Jones, A. (2019, September 1). Province's cuts to OSAP mean more debt, stress as students head back to school | CBC News. https://www.cbc.ca/news/canada/toronto/osap-debt-stress-students-1.5267350. 
 - R Core Team (2020). R: A language and environment for statistical computing. R, Foundation for Statistical Computing, Vienna, Austria. URL, https://www.R-project.org/.
 - JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and Winston Chang and Richard Iannone (2020). rmarkdown: Dynamic Documents for R. R package version 2.3. URL https://rmarkdown.rstudio.com.
 - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A
