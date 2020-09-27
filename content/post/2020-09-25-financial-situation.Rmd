@@ -232,7 +232,7 @@ In a future survey, it would be interesting to find out more about people are no
 
 # Code
 
-Codes can be found at https://github.com/reb-yang/edu_obstacles
+Codes can be found at https://github.com/reb-yang/edu_obstacles/tree/master/STA304
 
 
 Data accessed through CHASS Data Centre via the University of Toronto https://sda-artsci-utoronto-ca.myaccess.library.utoronto.ca/cgi-bin/sda/hsda?harcsda4+gss30
@@ -254,9 +254,9 @@ Special thanks to Rohan Alexander, a man with impeccable taste in Taylor Swift s
 - Sam Firke (2020). janitor: Simple Tools for Examining and Cleaning Dirty Data. R
   package version 2.0.1. https://CRAN.R-project.org/package=janitor
 - Statistics Canada. 2017. Does education pay? A comparison of earnings by level of education in Canada and its provinces and territories. Ottawa, Ontario. Analysis Series, 2016 Census. Statistics Canada Catalogue no. 98-200-X Last updated Apr 03, 2019.
-- Statistics Canada. 2017. General social survey on Canadians at Work and Home (cycle 30), 2016 (public-use microdata file). Statistics Canada (producer). Using CHASS (distributor).
+- Statistics Canada. (2017). General social survey on Canadians at Work and Home (cycle 30), 2016 (public-use microdata file). Statistics Canada (producer). Using CHASS (distributor).
 https://sda-artsci-utoronto-ca.myaccess.library.utoronto.ca/cgi-bin/sda/hsda?harcsda4+gss30 (accessed September 25, 2020). Accompanying documentation: user guide and questionnaire (PDF). 
-- Statistics Canada. 2020. "Half of recent postsecondary graduates had student debt prior to the pandemic." The Daily. July 28. Statistics Canada Catalogue no. 11-001-XIE.
+- Statistics Canada. (2020). "Half of recent postsecondary graduates had student debt prior to the pandemic." The Daily. July 28. Statistics Canada Catalogue no. 11-001-XIE.
 http://www.statcan.ca/Daily/English/040728/d040728a.htm (accessed August 16, 2005).
 https://www12.statcan.gc.ca/census-recensement/2016/as-sa/98-200-x/2016024/98-200-x2016024-eng.cfm (accessed September 26, 2020)
 - Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software,
