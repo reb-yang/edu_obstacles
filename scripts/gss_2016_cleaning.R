@@ -44,13 +44,18 @@ cw_statements <- label_raw_tibble %>%
   select(variable_name, cw_statement)
 
 # selecting variables 
-work_data <- data %>% select(agegr10, sex, prv, vismin, famincg2, mar_110, etu_01, etu_02gr, etu_03, etu_04) %>% mutate_at(vars(agegr10:etu_04), .funs = funs(ifelse(.>=96, NA, .))) %>% mutate_at(vars(agegr10:etu_04), .funs = funs(eval(parse(text = cw_statements %>% filter(variable_name==deparse(substitute(.))) %>% select(cw_statement) %>% pull()))))
+work_data <- data %>% 
+  select(wght_per, agegr10, sex, prv, vismin, famincg2, mar_110, etu_01, etu_02gr, etu_03, etu_04) %>% 
+  mutate_at(vars(agegr10:etu_04), .funs = funs(ifelse(.>=96, NA, .))) %>% 
+  mutate_at(vars(agegr10:etu_04), .funs = funs(eval(parse(text = cw_statements %>% 
+                                                            filter(variable_name==deparse(substitute(.))) %>% 
+                                                            select(cw_statement) %>% pull()))))
 
 # renaming variables
 
 work_data  <-  work_data %>% 
   clean_names() %>% 
-  rename(age_group = agegr10, sex = sex, province = prv, family_income = famincg2,  visibile_minority = vismin, main_activity = mar_110, likely_future_edu = etu_01, desired_future_edu = etu_02gr, obstacles = etu_03, obstacles_future_edu = etu_04)                                                   
+  rename(weight = wght_per, age_group = agegr10, sex = sex, province = prv, family_income = famincg2,  visibile_minority = vismin, main_activity = mar_110, likely_future_edu = etu_01, desired_future_edu = etu_02gr, obstacles = etu_03, obstacles_future_edu = etu_04)                                                   
 
 work_data <- work_data %>% mutate_at(vars(age_group:obstacles_future_edu), .funs = funs(ifelse(.=="Valid skip"|.=="Refusal"|.=="Not stated", "NA", .))) 
 
